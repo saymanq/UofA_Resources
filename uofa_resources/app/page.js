@@ -1,8 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react'
 import NavBar from '../components';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './login/page';
 import PDFDownload from '../components/PDFDownload';
 import { UserAuth } from '../context/AuthContext';
 

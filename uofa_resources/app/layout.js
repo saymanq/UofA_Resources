@@ -1,6 +1,7 @@
 import "./globals.css";
 import { AuthContextProvider } from "../context/AuthContext";
-import GoogleAnalytics from '@/components/GoogleAnalytics';
+//import GoogleAnalytics from '@/components/GoogleAnalytics';
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata = {
   title: "UofA Resources",
@@ -10,7 +11,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <GoogleAnalytics />
       <body style={{
         backgroundImage: `url("imgs/bgimg.jpeg")`,
         backgroundSize: 'cover',
@@ -23,6 +23,7 @@ export default function RootLayout({ children }) {
           {children}
         </AuthContextProvider>
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_MEASUREMENT_ID} />
     </html>
   );
 }
