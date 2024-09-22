@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { ref, listAll, getMetadata, getDownloadURL } from 'firebase/storage';
 import { firestore } from '@/firebase'
 import {collection, doc, getDocs, query, setDoc, deleteDoc, getDoc} from 'firebase/firestore'
@@ -33,6 +34,7 @@ const PDFDownloadList = () => {
       } catch (error) {
         console.error('Error fetching PDFs:', error);
         setError('Error fetching PDFs. Please try again later.');
+        toast.error('Error fetching PDFs. Please try again later.');
       }
     };
 
@@ -54,6 +56,7 @@ const PDFDownloadList = () => {
   const handleDownload = (url, filename) => {
     const link = document.createElement('a');
     link.href = url;
+    link.target = '_blank';
     link.download = filename;
     document.body.appendChild(link);
     link.click();
@@ -65,8 +68,9 @@ const PDFDownloadList = () => {
   }
 
   return (
-    <div className="px-12 flex items-center justify-center">
-      <div className='bg-emerald-500 w-[500px] flex items-center flex-col justify-center py-3'>
+    <div className="px-12 flex items-center flex-col justify-center">
+      <Toaster position="top-center" reverseOrder={false}/>
+      <div className='bg-emerald-500 sm:w-[500px] w-[400px] flex items-center flex-col justify-center py-3'>
         <h2 className="sm:text-2xl text-lg font-bold mb-4">STAT252 Fall 2024 Annotated Notes</h2>
         <div className='flex flex-row justify-between sm:w-[450px] w-[360px] mb-2 sm:text-sm text-xs'>
           <div>Instructor: Mike Kowalski</div>
@@ -78,7 +82,7 @@ const PDFDownloadList = () => {
         ) : (
           <ul className="">
             {pdfs.map((pdf, index) => (
-              <li key={index} className="mb-2 border-2 border-emerald-400 p-3 sm:w-[450px] w-[360px] sm:text-base hover:bg-emerald-300 hover:text-white">
+              <li key={index} className="mb-2 border-2 border-emerald-400 p-3 sm:w-[450px] w-[360px] sm:text-base hover:bg-emerald-300 ">
                 <div className='flex flex-row items-center justify-between'>
                   <button
                     onClick={() => handleDownload(pdf.url, pdf.name)}
@@ -92,6 +96,11 @@ const PDFDownloadList = () => {
             ))}
           </ul>
         )}
+      </div>
+      <div className='bg-emerald-500 sm:w-[500px] w-[400px] flex items-center flex-col justify-center p-3 mt-3 text-xs text-center sm:gap-1 gap-2'>
+        <div>Checkout my personal website <a href="https://sayman.me" target="_blank" className='text-blue-700 hover:underline'>here</a></div>
+        <div>Code for this website can be found at <a href="https://github.com/saymanq/UofA_Resources" target="_blank" className='text-blue-700 hover:underline'>https://github.com/saymanq/UofA_Resources</a></div>
+        <div>If you have feedback or suggestions please email me at <a href="mailto:syedaym1@ualberta.ca" target="_blank" className='text-blue-700 hover:underline'>syedaym1@ualberta.ca</a></div>
       </div>
     </div>
   );

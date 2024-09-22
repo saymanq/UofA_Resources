@@ -28,7 +28,22 @@ export default function Home() {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       zIndex: 0,}}>
       <NavBar />
-      {loading ? null : !user ? (<div className='w-full flex justify-center items-start'><div className="bg-emerald-600 text-white sm:w-[500px] w-[330px] h-[300px] flex justify-center items-center mt-[150px] flex-col rounded-2xl sm:text-[20px] text-[15px]">Please login to access resources</div> </div>) : (<div><PDFDownload /></div>)}
+      {loading ? null : !user ? (
+        <div className='flex justify-center flex-col items-center'>
+          <div className="bg-emerald-500 text-white sm:w-[500px] w-[330px] h-[300px] flex justify-center items-center mt-[150px] flex-col rounded-2xl sm:text-[20px] text-[15px]">
+            Please login to access resources
+          </div>
+          <div className='bg-emerald-500 sm:w-[500px] w-[400px] flex items-center flex-col justify-center p-3 mt-3 text-xs text-center sm:gap-1 gap-2'>
+            <div>Checkout my personal website <a href="https://sayman.me" target="_blank" className='text-blue-700 hover:underline'>here</a></div>
+            <div>Code for this website can be found at <a href="https://github.com/saymanq/UofA_Resources" target="_blank" className='text-blue-700 hover:underline'>https://github.com/saymanq/UofA_Resources</a></div>
+            <div>If you have feedback or suggestions please email me at <a href="mailto:syedaym1@ualberta.ca" target="_blank" className='text-blue-700 hover:underline'>syedaym1@ualberta.ca</a></div>
+          </div>
+        </div>
+        ) : (
+        <div>
+          <PDFDownload />
+        </div>
+        )}
     </div>
   )
     }
