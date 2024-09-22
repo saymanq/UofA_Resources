@@ -65,27 +65,34 @@ const PDFDownloadList = () => {
   }
 
   return (
-    <div className="px-12 flex items-center flex-col justify-center">
-      <h2 className="text-2xl font-bold mb-4">STAT252 Fall 2024 Annotated Notes</h2>
-      {pdfs.length === 0 ? (
-        <p>Loading PDFs...</p>
-      ) : (
-        <ul className="">
-          {pdfs.map((pdf, index) => (
-            <li key={index} className="mb-2 border-2 border-emerald-400 p-3 w-[450px]">
-              <div className='flex flex-row items-center justify-between'>
-                <button
-                  onClick={() => handleDownload(pdf.url, pdf.name)}
-                  className="text-blue-600 hover:underline"
-                >
-                    <div>{pdf.name}</div>
-                </button>
-              <div>{pdfsdata.find((pdfData) => pdfData.name === pdf.name).date}</div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className="px-12 flex items-center justify-center">
+      <div className='bg-emerald-500 w-[500px] flex items-center flex-col justify-center py-3'>
+        <h2 className="sm:text-2xl text-lg font-bold mb-4">STAT252 Fall 2024 Annotated Notes</h2>
+        <div className='flex flex-row justify-between sm:w-[450px] w-[360px] mb-2 sm:text-sm text-xs'>
+          <div>Instructor: Mike Kowalski</div>
+          <div>Lec B1 (52107)</div>
+          <div>13:00 - 13:50 MWF</div>
+        </div>
+        {pdfs.length === 0 ? (
+          <p>Loading PDFs...</p>
+        ) : (
+          <ul className="">
+            {pdfs.map((pdf, index) => (
+              <li key={index} className="mb-2 border-2 border-emerald-400 p-3 sm:w-[450px] w-[360px] sm:text-base hover:bg-emerald-300 hover:text-white">
+                <div className='flex flex-row items-center justify-between'>
+                  <button
+                    onClick={() => handleDownload(pdf.url, pdf.name)}
+                    className="text-blue-700 hover:underline"
+                  >
+                      <div>{pdf.name}</div>
+                  </button>
+                <div>{pdfsdata.find((pdfData) => pdfData.name === pdf.name).date}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };

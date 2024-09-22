@@ -9,7 +9,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body style={{
+        backgroundImage: `url("imgs/bgimg.jpeg")`,
+        backgroundSize: 'cover',
+        
+        backgroundRepeat: 'no-repeat',
+        position: 'relative',
+        minHeight: '100vh',
+      }}>
         <AuthContextProvider>
           {children}
         </AuthContextProvider>
